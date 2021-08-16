@@ -1,17 +1,17 @@
 {
     "properties": {
         "images": {
-            "description": "Define the images used by the {brandname} cluster.",
+            "description": "Sets the images used by the {brandname} cluster.",
             "properties": {
                 "server": {
-                    "description": "The {brandname} server image.",
+                    "description": "{brandname} Server image.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
                 "initContainer": {
-                    "description": "The image to use as a base for initContainers.",
+                    "description": "Base image for initContainers.",
                     "type": [
                         "string",
                         "null"
@@ -24,17 +24,17 @@
             ]
         },
         "deploy": {
-            "description": "{brandname} cluster configuration.",
+            "description": "Configuration properties for {brandname} clusters.",
             "properties": {
                 "replicas": {
-                    "description": "The number of {brandname} pods in the cluster.",
+                    "description": "Number of pods in the {brandname} cluster.",
                     "type": "integer"
                 },
                 "container": {
                     "description": "JVM, CPU, and memory resources for {brandname} pods.",
                     "properties": {
                         "extraJvmOpts": {
-                            "description": "JVM options passed to the {brandname} server.",
+                            "description": "Passes JVM options to {brandname} Server.",
                             "type": [
                                 "string",
                                 "null"
@@ -44,15 +44,15 @@
                             "description": "Storage resources for {brandname} pods.",
                             "properties": {
                                 "ephemeral": {
-                                    "description": "Whether storage is ephemeral or permanent. When set to true all persisted data is deleted when clusters shut down or restart.",
+                                    "description": "Defines whether storage is ephemeral or permanent. If true, then all persisted data is deleted when clusters shut down or restart.",
                                     "type": "boolean"
                                 },
                                 "size": {
-                                    "description": "The amount of storage for {brandname} pods.",
+                                    "description": "Defines how much storage is allocated to each {brandname} pod.",
                                     "type": "string"
                                 },
                                 "storageClassName": {
-                                    "description": "The name of a StorageClass object to use for the persistent volume claim (PVC). If you include this field, you must specify an existing storage class as the value. If you do not include this field, the persistent volume claim uses the storage class that has the storageclass.kubernetes.io/is-default-class annotation set to true.",
+                                    "description": "Specifies the name of a `StorageClass` object to use for the persistent volume claim (PVC).",
                                     "type": [
                                         "string",
                                         "null"
@@ -65,16 +65,16 @@
                             ]
                         },
                         "resources": {
-                            "description": "{brandname} Pod CPU and Memory resources",
+                            "description": "CPU and Memory resources for {brandname} pods.",
                             "properties": {
                                 "limits": {
                                     "properties": {
                                         "cpu": {
-                                            "description": "{brandname} pod's CPU limit (measured in CPU units).",
+                                            "description": "Defines the CPU limit, in CPU units, for each {brandname} pod.",
                                             "type": "string"
                                         },
                                         "memory": {
-                                            "description": "{brandname} pod's memory limit (measured in bytes).",
+                                            "description": "Defines the memory limit, in bytes, for each {brandname} pod.",
                                             "type": "string"
                                         }
                                     },
@@ -86,11 +86,11 @@
                                 "requests": {
                                     "properties": {
                                         "cpu": {
-                                            "description": "{brandname} pod's CPU requests (measured in CPU units).",
+                                            "description": "Specifies the maximum CPU requests, in CPU units, for each {brandname} pod.",
                                             "type": "string"
                                         },
                                         "memory": {
-                                            "description": "{brandname} pod's memory requests (measured in bytes).",
+                                            "description": "Specifies the maximum memory requests, in bytes, for each {brandname} pod.",
                                             "type": "string"
                                         }
                                     },
@@ -112,21 +112,21 @@
                     ]
                 },
                 "security": {
-                    "description": "Cluster security",
+                    "description": "Controls access to {brandname} clusters.",
                     "properties": {
                         "authentication": {
-                            "description": "If false authentication is disabled for {brandname}'s single-port endpoint.",
+                            "description": "Enables user authentication for {brandname} Hot Rod and REST endpoints. Specifying a value of false allows anonymous user access to {brandname} clusters.",
                             "type": "boolean"
                         },
                         "secretName": {
-                            "description": "Specifies a secret that contains all required security data.",
+                            "description": "Specifies the name of a secret that creates credentials and configures security authorization.",
                             "type": [
                                 "string",
                                 "null"
                             ]
                         },
                         "batch": {
-                            "description": "A {brandname} CLI batch file that can be used to create users, roles etc before server startup.",
+                            "description": "Provides a batch file for the {brandname} command line interface (CLI) to create credentials and configure security authorization.",
                             "type": [
                                 "string",
                                 "null"
@@ -139,10 +139,10 @@
                     ]
                 },
                 "expose": {
-                    "description": "How {brandname} is exposed to external networks",
+                    "description": "Controls network access to {brandname} Server endpoints.",
                     "properties": {
                         "type": {
-                            "description": "How to expose the {brandname} single-port externally. Set to empty if external access is not desired.",
+                            "description": "Specifies the service that exposes Hot Rod and REST endpoints on the network. Set an empty value ("") if you do not want to allow network access to {brandname}.",
                             "enum": [
                                 "",
                                 "Route"
@@ -154,18 +154,18 @@
                             "default": ""
                         },
                         "nodeport": {
-                            "description": "A node port to which the load balancer forwards traffic.",
+                            "description": "Specifies a network port for load balancer and node port services.",
                             "type": "integer"
                         },
                         "host": {
-                            "description": "Optional hostname to be exposed.",
+                            "description": "Optionally specifies the hostname where the service is exposed.",
                             "type": [
                                 "string",
                                 "null"
                             ]
                         },
                         "annotations": {
-                            "description": "Annotations added to the created network resource, e.g. a Route.",
+                            "description": "Adds annotations to the service that exposes {brandname} on the network.",
                             "items": {
                                 "properties": {
                                     "key": {
@@ -192,18 +192,18 @@
                     ]
                 },
                 "logging": {
-                    "description": "{brandname} server logging",
+                    "description": "Configures logging categories and levels for {brandname} Server.",
                     "properties": {
                         "categories": {
-                            "description": "Defines log levels for provided categories.",
+                            "description": "Adjusts the type and number of messages that {brandname} logs.",
                             "items": {
                                 "properties": {
                                     "category": {
-                                        "description": "The fqn of the package to configure logging for.",
+                                        "description": "Specifies the FQN of a {brandname} package for which you want to configure logging.",
                                         "type": "string"
                                     },
                                     "level": {
-                                        "description": "The logging level for this package.",
+                                        "description": "Specifies the level at which {brandname} logs messages for this package.",
                                         "default": "info",
                                         "enum": [
                                             "trace",
@@ -229,7 +229,7 @@
                     }
                 },
                 "resourceLabels": {
-                    "description": "Labels that are added to the created {brandname} resources, e.g. Pods and Services.",
+                    "description": "Adds labels to {brandname} resources such as pods and services.",
                     "items": {
                         "properties": {
                             "key": {

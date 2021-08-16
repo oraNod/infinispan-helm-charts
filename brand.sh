@@ -7,6 +7,8 @@ function brand() {
     sed -e "s,{brandname},$BRANDNAME," \
         -e "s,{website},$WEBSITE," \
         -e "s,{serverImage},$SERVER_IMAGE," \
+        -e "s,{k8s},$K8S," \
+        -e "s,{ingress},$INGRESS," \
     $1 > $2
 }
 
